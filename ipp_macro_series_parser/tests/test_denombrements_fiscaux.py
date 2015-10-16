@@ -170,12 +170,13 @@ original_data_frame_by_irpp_table_name = build_original_irpp_tables()
 
 
 excluded_variables = ['plus_values_mobilieres_stock_options', 'plus_values_mobilieres']
+# ajouter salaires_imposables ?
 
 messages = list()
 for irpp_table_name, data_frame in data_frame_by_irpp_table_name.iteritems():
     for year in data_frame.index:
         for variable in data_frame.columns:
-            if (year >= 2014) or year <= 2008:
+            if not year == 2010 :
                 continue
             if variable in excluded_variables:
                 continue

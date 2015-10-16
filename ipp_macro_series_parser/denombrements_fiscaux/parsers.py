@@ -823,7 +823,7 @@ def create_denombrements_fiscaux_data_frame(year = None, years = None, overwrite
     df2 = df2.loc[~(df2.code.isin(wrong_codes) | (df2.year.isin(wrong_years)))]
     result = df2.loc[df2.year.isin(years)].copy() if years is not None else df2.copy()
 
-    result = dgfip_denombrements.copy()
+    result = dgfip_denombrements.copy()  # seulement DGFiP pour l'instant. TODO: recoupement avec data OpenFisca & IPP
 
     if overwrite:
         save_df_to_hdf(result, 'denombrements_fiscaux', 'montants')
@@ -836,7 +836,7 @@ def get_denombrements_fiscaux_data_frame(year = None, years = None, rebuild = Fa
     if year is not None and years is None:
         years = [year]
     if rebuild:
-        return get_denombrements_fiscaux_data_frame(years = years, overwrite = overwrite)
+        return create_denombrements_fiscaux_data_frame(years = years, overwrite = overwrite)
     else:
         data_frame = import_from_hdf('denombrements_fiscaux', 'montants')
         return data_frame.loc[data_frame.year.isin(years)].copy()
