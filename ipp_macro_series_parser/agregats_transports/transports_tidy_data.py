@@ -24,7 +24,7 @@ def tidy_melt_categorie_index(data_frame):
 
 def tidy_column_names(data_frame):
     data_frame.columns = data_frame.columns.astype(str)
-    for year in range[1990, 2014]:
+    for year in range[1990, 2015]:
         data_frame.rename(columns = {'{}'.format(year): '_{}'.format(year)}, inplace = True)
     return data_frame
 
